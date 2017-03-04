@@ -1,0 +1,33 @@
+{
+  "name": "konsulting/laravel-validation-repo",
+  "description": "A centralised repository for validation rules, for use with the Laravel validator.",
+  "keywords": [
+    "laravel",
+    "validator",
+    "repository"
+  ],
+  "license": "MIT",
+  "authors": [
+    {
+      "name": "Robin D'Arcy",
+      "email": "robin@klever.co.uk"
+    }
+  ],
+  "type": "project",
+  "require": {
+    "php": "^7.0"
+  },
+  "require-dev": {
+    "mockery/mockery": "0.9.*",
+    "phpunit/phpunit": "~5.7",
+    "orchestra/testbench": "^3.4"
+  },
+  "autoload": {
+    "psr-4": {
+      "Konsulting\\Laravel\\ValidationRepo\\": "src/"
+    }
+  },
+  "autoload-dev": {
+    "classmap": ["tests"]
+  }
+}
