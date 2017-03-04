@@ -28,14 +28,12 @@ class ValidationRepo
      * Create a new instance and load in rules from config if needed, then return the instance.
      *
      * @param $model
-     * @return mixed
+     * @return ValidationRuleHolder
      */
-    protected function singleton($model)
+    protected function singleton($model): ValidationRuleHolder
     {
-        $c = config('validation_repo.' . $model) ?? [];
         if ( ! isset($this->ruleHolders[$model])) {
-            $this->ruleHolders[$model] = (new ValidationRuleHolder($model))
-                ->setRules($c);
+            $this->ruleHolders[$model] = $this->newRuleHolder($model);
         }
 
         return $this->ruleHolders[$model];
@@ -50,5 +48,28 @@ class ValidationRepo
     protected function getClassPath($class): string
     {
         return is_string($class) ? $class : get_class($class);
+    }
+
+    /**
+     * Instantiate a new rule holder and set the rules from config if required.
+     *
+     * @param string $model
+     * @return ValidationRuleHolder
+     */
+    protected function newRuleHolder($model): ValidationRuleHolder
+    {
+        return (new ValidationRuleHolder($model))
+            ->setRules($this->getInitialRules($model));
+    }
+
+    /**
+     * Fetch the rules for a given model from the config.
+     *
+     * @param $model
+     * @return array
+     */
+    protected function getInitialRules($model): array
+    {
+        return config('validation_repo.' . $model) ?? [];
     }
 }
