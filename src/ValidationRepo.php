@@ -25,7 +25,7 @@ class ValidationRepo
     }
 
     /**
-     * Create a new instance and load in rules from config if needed, then return the instance.
+     * Create a new rule holder instance if needed, then return the instance.
      *
      * @param $model
      * @return ValidationRuleHolder

@@ -69,6 +69,17 @@ class ValidationRuleHolder
     }
 
     /**
+     * Split the rule string into an array of rules.
+     *
+     * @param string $rules
+     * @return array
+     */
+    protected function explodeRules($rules): array
+    {
+        return explode('|', $rules);
+    }
+
+    /**
      * Merge with existing rules on the model.
      *
      * @param array $fieldsAndRules
@@ -81,17 +92,6 @@ class ValidationRuleHolder
         }
 
         return $this;
-    }
-
-    /**
-     * Split the rule string into an array of rules.
-     *
-     * @param string $rules
-     * @return array
-     */
-    protected function explodeRules($rules): array
-    {
-        return explode('|', $rules);
     }
 
     /**

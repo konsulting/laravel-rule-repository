@@ -2,6 +2,7 @@
 
 namespace Konsulting\Laravel\ValidationRepo;
 
+use Model;
 use ValidationRepoTestCase as TestCase;
 
 class ValidationRepoTest extends TestCase
