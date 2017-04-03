@@ -1,8 +1,8 @@
 <?php
 
-namespace Konsulting\Laravel\ValidationRepo;
+namespace Klever\Laravel\ValidationRepository;
 
-class ValidationRepo
+class ValidationRepository
 {
     /**
      * The validation rules and the class paths to apply them to.
@@ -17,7 +17,7 @@ class ValidationRepo
      * @param string|object $class
      * @return ValidationRuleHolder
      */
-    public function for ($class): ValidationRuleHolder
+    public function for ($class) : ValidationRuleHolder
     {
         $model = $this->getClassPath($class);
 
@@ -30,7 +30,7 @@ class ValidationRepo
      * @param $model
      * @return ValidationRuleHolder
      */
-    protected function singleton($model): ValidationRuleHolder
+    protected function singleton($model) : ValidationRuleHolder
     {
         if ( ! isset($this->ruleHolders[$model])) {
             $this->ruleHolders[$model] = $this->newRuleHolder($model);
@@ -45,7 +45,7 @@ class ValidationRepo
      * @param $class
      * @return string
      */
-    protected function getClassPath($class): string
+    protected function getClassPath($class) : string
     {
         return is_string($class) ? $class : get_class($class);
     }
@@ -56,7 +56,7 @@ class ValidationRepo
      * @param string $model
      * @return ValidationRuleHolder
      */
-    protected function newRuleHolder($model): ValidationRuleHolder
+    protected function newRuleHolder($model) : ValidationRuleHolder
     {
         return (new ValidationRuleHolder($model))
             ->setRules($this->getInitialRules($model));
@@ -68,7 +68,7 @@ class ValidationRepo
      * @param $model
      * @return array
      */
-    protected function getInitialRules($model): array
+    protected function getInitialRules($model) : array
     {
         return config('validation_repo.' . $model) ?? [];
     }

@@ -1,16 +1,16 @@
 <?php
 
-namespace Konsulting\Laravel\ValidationRepo;
+namespace Klever\Laravel\ValidationRepository;
 
 use Model;
-use ValidationRepoTestCase as TestCase;
+use ValidationRepositoryTestCase as TestCase;
 
-class ValidationRepoTest extends TestCase
+class ValidationRepositoryTest extends TestCase
 {
     /** @test */
     function it_loads_a_rule_holder()
     {
-        $holder = (new ValidationRepo)->for(Model::class);
+        $holder = (new ValidationRepository)->for(Model::class);
 
         $this->assertInstanceOf(ValidationRuleHolder::class, $holder);
     }
@@ -18,7 +18,7 @@ class ValidationRepoTest extends TestCase
     /** @test */
     function it_loads_a_singleton_rule_holder()
     {
-        $repository = new ValidationRepo;
+        $repository = new ValidationRepository;
         $holder = $repository->for(Model::class);
         $holder2 = $repository->for(Model::class);
 

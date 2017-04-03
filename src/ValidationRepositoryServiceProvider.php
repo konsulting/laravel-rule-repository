@@ -1,11 +1,11 @@
 <?php
 
-namespace Konsulting\Laravel\ValidationRepo;
+namespace Klever\Laravel\ValidationRepository;
 
 use App\User;
 use Illuminate\Support\ServiceProvider;
 
-class ValidationRepoServiceProvider extends ServiceProvider
+class ValidationRepositoryServiceProvider extends ServiceProvider
 {
     /**
      * Bootstrap the application services.
@@ -24,8 +24,8 @@ class ValidationRepoServiceProvider extends ServiceProvider
      */
     public function register()
     {
-        $this->app->singleton(ValidationRepo::class, function () {
-            return (new ValidationRepo());
+        $this->app->singleton(ValidationRepository::class, function () {
+            return (new ValidationRepository());
         });
     }
 }

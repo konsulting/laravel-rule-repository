@@ -1,5 +1,5 @@
 {
-  "name": "konsulting/laravel-validation-repo",
+  "name": "klever/laravel-validation-repo",
   "description": "A centralised repository for validation rules, for use with the Laravel validator.",
   "keywords": [
     "laravel",
@@ -24,7 +24,7 @@
   },
   "autoload": {
     "psr-4": {
-      "Konsulting\\Laravel\\ValidationRepo\\": "src/"
+      "Klever\\Laravel\\ValidationRepository\\": "src/"
     }
   },
   "autoload-dev": {

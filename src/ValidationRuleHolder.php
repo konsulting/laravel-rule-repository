@@ -1,10 +1,9 @@
 <?php
 
-namespace Konsulting\Laravel\ValidationRepo;
+namespace Klever\Laravel\ValidationRepository;
 
 class ValidationRuleHolder
 {
-
     /**
      * The class path that the rules are for.
      *
@@ -34,7 +33,7 @@ class ValidationRuleHolder
      *
      * @return string
      */
-    public function getClassPath(): string
+    public function getClassPath() : string
     {
         return $this->classPath;
     }
@@ -44,7 +43,7 @@ class ValidationRuleHolder
      *
      * @return array
      */
-    public function get(): array
+    public function get() : array
     {
         foreach ($this->validationRules as $fieldName => $rules) {
             $ruleArray[$fieldName] = implode('|', $rules);
@@ -59,7 +58,7 @@ class ValidationRuleHolder
      * @param array $fieldsAndRules
      * @return self
      */
-    public function setRules($fieldsAndRules): self
+    public function setRules($fieldsAndRules) : self
     {
         foreach ($fieldsAndRules as $fieldName => $rules) {
             $this->validationRules[$fieldName] = $this->explodeRules($rules);
@@ -74,7 +73,7 @@ class ValidationRuleHolder
      * @param string $rules
      * @return array
      */
-    protected function explodeRules($rules): array
+    protected function explodeRules($rules) : array
     {
         return explode('|', $rules);
     }
@@ -85,7 +84,7 @@ class ValidationRuleHolder
      * @param array $fieldsAndRules
      * @return self
      */
-    public function mergeRules($fieldsAndRules): self
+    public function mergeRules($fieldsAndRules) : self
     {
         foreach ($fieldsAndRules as $fieldName => $rules) {
             $this->validationRules[$fieldName] = $this->appendRulesToField($fieldName, $this->explodeRules($rules));
@@ -101,7 +100,7 @@ class ValidationRuleHolder
      * @param array  $rules
      * @return array
      */
-    protected function appendRulesToField($fieldName, $rules): array
+    protected function appendRulesToField($fieldName, $rules) : array
     {
         return array_unique(array_merge($this->validationRules[$fieldName] ?? [], $rules));
     }

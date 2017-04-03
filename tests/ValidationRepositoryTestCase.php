@@ -2,7 +2,7 @@
 
 use Orchestra\Testbench\TestCase as BaseTestCase;
 
-abstract class ValidationRepoTestCase extends BaseTestCase
+abstract class ValidationRepositoryTestCase extends BaseTestCase
 {
 }
 
