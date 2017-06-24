@@ -2,8 +2,7 @@
 
 namespace Klever\Laravel\ValidationRepository;
 
-use Model;
-use ValidationRepositoryTestCase as TestCase;
+use Klever\Laravel\ValidationRepository\ValidationRepositoryTestCase as TestCase;
 
 class ValidationRepositoryTest extends TestCase
 {
@@ -12,7 +11,7 @@ class ValidationRepositoryTest extends TestCase
     {
         $holder = (new ValidationRepository)->for(Model::class);
 
-        $this->assertInstanceOf(ValidationRuleHolder::class, $holder);
+        $this->assertInstanceOf(RuleBag::class, $holder);
     }
 
     /** @test */

@@ -15,9 +15,9 @@ class ValidationRepository
      * Return the rule holder for the specified class.
      *
      * @param string|object $class
-     * @return ValidationRuleHolder
+     * @return RuleBag
      */
-    public function for ($class) : ValidationRuleHolder
+    public function for ($class) : RuleBag
     {
         $model = $this->getClassPath($class);
 
@@ -28,9 +28,9 @@ class ValidationRepository
      * Create a new rule holder instance if needed, then return the instance.
      *
      * @param $model
-     * @return ValidationRuleHolder
+     * @return RuleBag
      */
-    protected function singleton($model) : ValidationRuleHolder
+    protected function singleton($model) : RuleBag
     {
         if ( ! isset($this->ruleHolders[$model])) {
             $this->ruleHolders[$model] = $this->newRuleHolder($model);
@@ -54,11 +54,11 @@ class ValidationRepository
      * Instantiate a new rule holder and set the rules from config if required.
      *
      * @param string $model
-     * @return ValidationRuleHolder
+     * @return RuleBag
      */
-    protected function newRuleHolder($model) : ValidationRuleHolder
+    protected function newRuleHolder($model) : RuleBag
     {
-        return (new ValidationRuleHolder($model))
+        return (new RuleBag($model))
             ->setRules($this->getInitialRules($model));
     }
 

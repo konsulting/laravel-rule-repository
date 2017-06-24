@@ -2,10 +2,9 @@
 
 namespace Klever\Laravel\ValidationRepository;
 
-use Model;
-use ValidationRepositoryTestCase as TestCase;
+use Klever\Laravel\ValidationRepository\ValidationRepositoryTestCase as TestCase;
 
-class ValidationRuleHolderTest extends TestCase
+class RuleBagTest extends TestCase
 {
     /** @test */
     function it_returns_the_class_name()

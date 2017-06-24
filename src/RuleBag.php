@@ -2,7 +2,9 @@
 
 namespace Klever\Laravel\ValidationRepository;
 
-class ValidationRuleHolder
+use Illuminate\Support\Collection;
+
+class RuleBag
 {
     /**
      * The class path that the rules are for.
@@ -12,11 +14,11 @@ class ValidationRuleHolder
     public $classPath;
 
     /**
-     * The validation rules.
+     * The fields under validation.
      *
-     * @var array
+     * @var Collection
      */
-    public $validationRules = [];
+    public $fields;
 
     /**
      * Set the class path that the holder is for.
@@ -26,6 +28,7 @@ class ValidationRuleHolder
     public function __construct(string $classPath)
     {
         $this->classPath = $classPath;
+        $this->fields = Collection::make();
     }
 
     /**
@@ -45,11 +48,9 @@ class ValidationRuleHolder
      */
     public function get() : array
     {
-        foreach ($this->validationRules as $fieldName => $rules) {
-            $ruleArray[$fieldName] = implode('|', $rules);
-        }
-
-        return $ruleArray ?? [];
+        return $this->fields->map(function ($field) {
+            return $field->fieldString();
+        })->toArray();
     }
 
     /**
@@ -61,21 +62,11 @@ class ValidationRuleHolder
     public function setRules($fieldsAndRules) : self
     {
         foreach ($fieldsAndRules as $fieldName => $rules) {
-            $this->validationRules[$fieldName] = $this->explodeRules($rules);
+            $this->fields->put($fieldName, new Field($fieldName))
+                ->get($fieldName)->addRules($rules);
         }
 
         return $this;
-    }
-
-    /**
-     * Split the rule string into an array of rules.
-     *
-     * @param string $rules
-     * @return array
-     */
-    protected function explodeRules($rules) : array
-    {
-        return explode('|', $rules);
     }
 
     /**
@@ -87,14 +78,14 @@ class ValidationRuleHolder
     public function mergeRules($fieldsAndRules) : self
     {
         foreach ($fieldsAndRules as $fieldName => $rules) {
-            $this->validationRules[$fieldName] = $this->appendRulesToField($fieldName, $this->explodeRules($rules));
+            $this->fields->get($fieldName)->addRules($rules);
         }
 
         return $this;
     }
 
     /**
-     * Append rules to a field, creating an index for that field in the array if it doesn't exist.
+     * Append rules to a field, creating an index for that field in the array if it does not exist.
      *
      * @param string $fieldName
      * @param array  $rules
