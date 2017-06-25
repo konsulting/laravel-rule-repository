@@ -6,7 +6,11 @@ use Exception;
 
 trait ValidationRepositoryTrait
 {
-    protected $validationRepository;
+    /**
+     * The repository holder instance.
+     *
+     * @var RepositoryHolder
+     */
     protected $repositoryInstance;
 
     /**
@@ -15,24 +19,24 @@ trait ValidationRepositoryTrait
      * @param string $state
      * @return array
      */
-    public function validate($state = null)
+    public function validationRules($state = null)
     {
-        return $this->repositoryInstance->$state();
+        return $this->getInstance()->getRules($state);
     }
 
     /**
      * Get the validation repository instance for the class.
      *
-     * @return ValidationRepository
+     * @return RepositoryHolder
      * @throws Exception
      */
     protected function getInstance()
     {
         if ( ! $this->validationRepository) {
-            throw new Exception('No validation repository class set.');
+            throw new Exception('No validation repository class set. Please set the validationRepository property.');
         }
 
         return $this->repositoryInstance
-            ?: $this->repositoryInstance = new ValidationRepository();
+            ?: $this->repositoryInstance = new RepositoryHolder(new $this->validationRepository);
     }
 }
