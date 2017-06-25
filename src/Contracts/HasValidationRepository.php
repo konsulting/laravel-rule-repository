@@ -10,5 +10,5 @@ interface HasValidationRepository
      * @param string $state
      * @return array
      */
-    public function validationRules($state);
+    public static function validationRules($state);
 }

@@ -11,7 +11,7 @@ trait ValidationRepositoryTrait
      *
      * @var RepositoryHolder
      */
-    protected $repositoryInstance;
+    protected static $repositoryInstance;
 
     /**
      * Return the array of validation rules.
@@ -19,9 +19,9 @@ trait ValidationRepositoryTrait
      * @param string $state
      * @return array
      */
-    public function validationRules($state = null)
+    public static function validationRules($state = null)
     {
-        return $this->getInstance()->getRules($state);
+        return static::getInstance()->getRules($state);
     }
 
     /**
@@ -30,13 +30,13 @@ trait ValidationRepositoryTrait
      * @return RepositoryHolder
      * @throws Exception
      */
-    protected function getInstance()
+    protected static function getInstance()
     {
-        if ( ! $this->validationRepository) {
+        if ( ! static::$validationRepository) {
             throw new Exception('No validation repository class set. Please set the validationRepository property.');
         }
 
-        return $this->repositoryInstance
-            ?: $this->repositoryInstance = new RepositoryHolder(new $this->validationRepository);
+        return static::$repositoryInstance
+            ?: static::$repositoryInstance = new RepositoryHolder(new static::$validationRepository);
     }
 }
