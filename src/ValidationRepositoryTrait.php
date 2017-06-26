@@ -9,7 +9,7 @@ trait ValidationRepositoryTrait
     /**
      * The repository holder instance.
      *
-     * @var RepositoryHolder
+     * @var RepositoryManager
      */
     protected static $repositoryInstance;
 
@@ -27,7 +27,7 @@ trait ValidationRepositoryTrait
     /**
      * Get the validation repository instance for the class.
      *
-     * @return RepositoryHolder
+     * @return RepositoryManager
      * @throws Exception
      */
     protected static function getInstance()
@@ -37,6 +37,6 @@ trait ValidationRepositoryTrait
         }
 
         return static::$repositoryInstance
-            ?: static::$repositoryInstance = new RepositoryHolder(new static::$validationRepository);
+            ?: static::$repositoryInstance = new RepositoryManager(new static::$validationRepository);
     }
 }

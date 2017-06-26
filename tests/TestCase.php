@@ -15,10 +15,10 @@ class Model implements HasValidationRepository
 {
     use ValidationRepositoryTrait;
 
-    protected static $validationRepository = Repository::class;
+    protected static $validationRepository = ModelValidationRepository::class;
 }
 
-class Repository implements ValidationRepository
+class ModelValidationRepository implements ValidationRepository
 {
     public function default() : array
     {

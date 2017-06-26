@@ -5,7 +5,7 @@ namespace Klever\Laravel\ValidationRepository;
 use Klever\Laravel\ValidationRepository\Contracts\ValidationRepository;
 use Klever\Laravel\ValidationRepository\Exceptions\NonExistentStateException;
 
-class RepositoryHolder
+class RepositoryManager
 {
     /**
      * The repository instance.

@@ -3,13 +3,13 @@
 namespace Klever\Laravel\ValidationRepository\Tests;
 
 use Klever\Laravel\ValidationRepository\Exceptions\NonExistentStateException;
-use Klever\Laravel\ValidationRepository\RepositoryHolder;
+use Klever\Laravel\ValidationRepository\RepositoryManager;
 use Klever\Laravel\ValidationRepository\Tests\TestCase as TestCase;
 
-class RepositoryHolderTest extends TestCase
+class RepositoryManagerTest extends TestCase
 {
     /**
-     * @var RepositoryHolder
+     * @var RepositoryManager
      */
     protected $holder;
 
@@ -17,7 +17,7 @@ class RepositoryHolderTest extends TestCase
     {
         parent::setUp();
 
-        $this->holder = new RepositoryHolder(new Repository);
+        $this->holder = new RepositoryManager(new ModelValidationRepository);
     }
 
     /** @test */
