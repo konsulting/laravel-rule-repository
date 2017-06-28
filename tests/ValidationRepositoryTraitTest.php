@@ -2,7 +2,9 @@
 
 namespace Klever\Laravel\ValidationRepository\Tests;
 
+use Klever\Laravel\ValidationRepository\Contracts\ValidationRepository;
 use Klever\Laravel\ValidationRepository\Tests\TestCase as TestCase;
+use Klever\Laravel\ValidationRepository\ValidationRepositoryTrait;
 
 class ValidationRepositoryTraitTest extends TestCase
 {
@@ -24,5 +26,52 @@ class ValidationRepositoryTraitTest extends TestCase
         $rules = $this->model->validationRules();
 
         $this->assertEquals(['test_field' => 'required'], $rules);
+    }
+
+    /** @test */
+    public function it_accepts_multiple_repositories()
+    {
+        $transformerRules = MultipleRepoModel::transformerRules();
+        $validationRules = MultipleRepoModel::validationRules();
+
+        $this->assertEquals(['field' => 'required'], $validationRules);
+        $this->assertEquals(['field' => 'trim'], $transformerRules);
+    }
+
+    /** @test */
+    public function rules_can_be_retrieved_with_the_get_rules_method()
+    {
+        $rules = $this->model::getRules('validation');
+        $updateRules = $this->model::getRules('validation', 'update');
+
+        $this->assertEquals(['test_field' => 'required'], $rules);
+        $this->assertEquals(['test_field' => 'date'], $updateRules);
+    }
+}
+
+
+class MultipleRepoModel
+{
+    use ValidationRepositoryTrait;
+
+    protected static $ruleRepositories = [
+        'validation'  => MultipleRepoModelValidationRepository::class,
+        'transformer' => MultipleRepoModelTransformerRepository::class,
+    ];
+}
+
+class MultipleRepoModelValidationRepository implements ValidationRepository
+{
+    public function default() : array
+    {
+        return ['field' => 'required'];
+    }
+}
+
+class MultipleRepoModelTransformerRepository implements ValidationRepository
+{
+    public function default() : array
+    {
+        return ['field' => 'trim'];
     }
 }

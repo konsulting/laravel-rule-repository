@@ -15,7 +15,7 @@ class Model implements HasValidationRepository
 {
     use ValidationRepositoryTrait;
 
-    protected static $validationRepository = ModelValidationRepository::class;
+    protected static $ruleRepositories = ['validation' => ModelValidationRepository::class];
 }
 
 class ModelValidationRepository implements ValidationRepository
