@@ -33,9 +33,11 @@ class ValidationRepositoryTraitTest extends TestCase
     {
         $transformerRules = MultipleRepoModel::transformerRules();
         $validationRules = MultipleRepoModel::validationRules();
+        $stateValidationRules = MultipleRepoModel::validationRules('edit');
 
-        $this->assertEquals(['field' => 'required'], $validationRules);
         $this->assertEquals(['field' => 'trim'], $transformerRules);
+        $this->assertEquals(['field' => 'required'], $validationRules);
+        $this->assertEquals(['field' => 'date'], $stateValidationRules);
     }
 
     /** @test */
@@ -47,8 +49,23 @@ class ValidationRepositoryTraitTest extends TestCase
         $this->assertEquals(['test_field' => 'required'], $rules);
         $this->assertEquals(['test_field' => 'date'], $updateRules);
     }
+
+    /** @test */
+    public function a_rule_repository_can_be_attached_using_a_dynamically_named_property()
+    {
+        $rules = DynamicRepoModel::validationRules();
+
+        $this->assertEquals(['test_field' => 'required'], $rules);
+    }
 }
 
+
+class DynamicRepoModel
+{
+    use ValidationRepositoryTrait;
+
+    protected static $validationRepository = ModelValidationRepository::class;
+}
 
 class MultipleRepoModel
 {
@@ -65,6 +82,11 @@ class MultipleRepoModelValidationRepository implements ValidationRepository
     public function default() : array
     {
         return ['field' => 'required'];
+    }
+
+    public function edit()
+    {
+        return ['field' => 'date'];
     }
 }
 

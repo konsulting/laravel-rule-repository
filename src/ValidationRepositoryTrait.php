@@ -3,13 +3,14 @@
 namespace Klever\Laravel\ValidationRepository;
 
 use Exception;
+use Illuminate\Support\Collection;
 
 
 /**
  * Trait ValidationRepositoryTrait
  *
- * @method static array validationRules
- * @method static array transformerRules
+ * @method static array validationRules(string $state = '')
+ * @method static array transformerRules(string $state = '')
  */
 trait ValidationRepositoryTrait
 {
@@ -19,6 +20,11 @@ trait ValidationRepositoryTrait
      * @var RepositoryManager
      */
     protected static $repositoryInstances;
+
+    /**
+     * @var Collection
+     */
+    protected static $masterRepositoryList;
 
     /**
      * Return the array of validation rules.
@@ -39,7 +45,7 @@ trait ValidationRepositoryTrait
      */
     public static function __callStatic(string $method, array $args = [])
     {
-        $repositoryName = static::extractRepositoryNameFromMethod($method);
+        $repositoryName = static::extractFromString($method, 'Rules');
         if ($repositoryName) {
             return static::getRules($repositoryName, ...$args);
         }
@@ -58,7 +64,7 @@ trait ValidationRepositoryTrait
      */
     public function __call(string $method, array $args = [])
     {
-        $repositoryName = static::extractRepositoryNameFromMethod($method);
+        $repositoryName = static::extractFromString($method, 'Rules');
         if ($repositoryName) {
             return static::getRules($repositoryName, ...$args);
         }
@@ -79,25 +85,44 @@ trait ValidationRepositoryTrait
      */
     protected static function getInstance($name)
     {
-        if ( ! static::$ruleRepositories) {
-            throw new Exception('No validation repository classes set. Please set the ruleRepositories property.');
+        static::$masterRepositoryList = collect();
+
+        if (isset(static::$ruleRepositories)) {
+            static::$masterRepositoryList = collect(static::$ruleRepositories);
         }
 
+        static::extractRepositoriesFromProperties();
+
+//        if ( ! static::$ruleRepositories) {
+//            throw new Exception('No validation repository classes set. Please set the ruleRepositories property.');
+//        }
+
         return static::$repositoryInstances[$name]
-            ?? (static::$repositoryInstances[$name] = new RepositoryManager(new static::$ruleRepositories[$name]));
+            ?? (static::$repositoryInstances[$name] = new RepositoryManager(new static::$masterRepositoryList[$name]));
     }
 
     /**
-     * Check if the method name ends in 'Rules'. If it does, return the extracted preceding repository name; if not
+     * Check if $string ends in $search. If it does, extract and return the string minus the search string; if not
      * return null.
      *
-     * @param string $method
-     * @return string|null
+     * @param string $string
+     * @param string $search
+     * @return string
      */
-    private static function extractRepositoryNameFromMethod($method)
+    private static function extractFromString($string, $search)
     {
-        return substr($method, -5) == 'Rules'
-            ? str_replace('Rules', '', $method)
+        return substr($string, 0 - strlen($search)) == $search
+            ? str_replace($search, '', $string)
             : null;
+    }
+
+    private static function extractRepositoriesFromProperties()
+    {
+        foreach (get_class_vars(static::class) as $key => $value) {
+            $repositoryName = static::extractFromString($key, 'Repository');
+            if ($repositoryName) {
+                static::$masterRepositoryList->put($repositoryName, $value);
+            }
+        }
     }
 }
