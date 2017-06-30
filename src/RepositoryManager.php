@@ -1,9 +1,9 @@
 <?php
 
-namespace Klever\Laravel\ValidationRepository;
+namespace Klever\Laravel\RuleRepository;
 
-use Klever\Laravel\ValidationRepository\Contracts\ValidationRepository;
-use Klever\Laravel\ValidationRepository\Exceptions\NonExistentStateException;
+use Klever\Laravel\RuleRepository\Contracts\ValidationRepository;
+use Klever\Laravel\RuleRepository\Exceptions\NonExistentStateException;
 
 class RepositoryManager
 {

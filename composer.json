@@ -23,7 +23,7 @@
   },
   "autoload": {
     "psr-4": {
-      "Klever\\Laravel\\ValidationRepository\\": "src/"
+      "Klever\\Laravel\\RuleRepository\\": "src/"
     }
   },
   "autoload-dev": {

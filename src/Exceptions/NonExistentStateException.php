@@ -1,6 +1,6 @@
 <?php
 
-namespace Klever\Laravel\ValidationRepository\Exceptions;
+namespace Klever\Laravel\RuleRepository\Exceptions;
 
 use Exception;
 use Throwable;

@@ -1,19 +1,19 @@
 <?php
 
-namespace Klever\Laravel\ValidationRepository\Tests;
+namespace Klever\Laravel\RuleRepository\Tests;
 
-use Klever\Laravel\ValidationRepository\Contracts\HasValidationRepository;
-use Klever\Laravel\ValidationRepository\Contracts\ValidationRepository;
-use Klever\Laravel\ValidationRepository\ValidationRepositoryTrait;
+use Klever\Laravel\RuleRepository\Contracts\HasRuleRepositories;
+use Klever\Laravel\RuleRepository\Contracts\ValidationRepository;
+use Klever\Laravel\RuleRepository\RuleRepositoryTrait;
 use Orchestra\Testbench\TestCase as BaseTestCase;
 
 abstract class TestCase extends BaseTestCase
 {
 }
 
-class Model implements HasValidationRepository
+class Model implements HasRuleRepositories
 {
-    use ValidationRepositoryTrait;
+    use RuleRepositoryTrait;
 
     protected static $ruleRepositories = ['validation' => ModelValidationRepository::class];
 }

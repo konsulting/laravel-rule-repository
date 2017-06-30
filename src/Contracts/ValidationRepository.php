@@ -1,6 +1,6 @@
 <?php
 
-namespace Klever\Laravel\ValidationRepository\Contracts;
+namespace Klever\Laravel\RuleRepository\Contracts;
 
 interface ValidationRepository
 {

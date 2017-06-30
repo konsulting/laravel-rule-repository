@@ -1,18 +1,11 @@
 <?php
 
-namespace Klever\Laravel\ValidationRepository;
+namespace Klever\Laravel\RuleRepository;
 
 use Exception;
 use Illuminate\Support\Collection;
 
-
-/**
- * Trait ValidationRepositoryTrait
- *
- * @method static array validationRules(string $state = '')
- * @method static array transformerRules(string $state = '')
- */
-trait ValidationRepositoryTrait
+trait RuleRepositoryTrait
 {
     /**
      * The repository holder instance.
@@ -39,44 +32,6 @@ trait ValidationRepositoryTrait
     }
 
     /**
-     * @param string $method
-     * @param array  $args
-     * @return array
-     */
-    public static function __callStatic(string $method, array $args = [])
-    {
-        $repositoryName = static::extractFromString($method, 'Rules');
-        if ($repositoryName) {
-            return static::getRules($repositoryName, ...$args);
-        }
-
-        if (get_parent_class(static::class)) {
-            return parent::__callStatic($method, $args);
-        }
-
-        return null;
-    }
-
-    /**
-     * @param string $method
-     * @param array  $args
-     * @return array
-     */
-    public function __call(string $method, array $args = [])
-    {
-        $repositoryName = static::extractFromString($method, 'Rules');
-        if ($repositoryName) {
-            return static::getRules($repositoryName, ...$args);
-        }
-
-        if (get_parent_class($this)) {
-            return parent::__call($method, $args);
-        }
-
-        return null;
-    }
-
-    /**
      * Get the validation repository instance for the class.
      *
      * @param $name
@@ -92,10 +47,6 @@ trait ValidationRepositoryTrait
         }
 
         static::extractRepositoriesFromProperties();
-
-//        if ( ! static::$ruleRepositories) {
-//            throw new Exception('No validation repository classes set. Please set the ruleRepositories property.');
-//        }
 
         return static::$repositoryInstances[$name]
             ?? (static::$repositoryInstances[$name] = new RepositoryManager(new static::$masterRepositoryList[$name]));

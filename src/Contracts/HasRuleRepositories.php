@@ -1,8 +1,8 @@
 <?php
 
-namespace Klever\Laravel\ValidationRepository\Contracts;
+namespace Klever\Laravel\RuleRepository\Contracts;
 
-interface HasValidationRepository
+interface HasRuleRepositories
 {
     /**
      * Return the array of rules for a given repository.
