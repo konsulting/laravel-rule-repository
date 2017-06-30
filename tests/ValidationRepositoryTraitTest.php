@@ -57,15 +57,6 @@ class ValidationRepositoryTraitTest extends TestCase
 
         $this->assertEquals(['test_field' => 'required'], $rules);
     }
-
-    /** @test */
-    public function model()
-    {
-        $this->assertEquals(['test_field' => 'required'], EloquentModel::getRules('validation'));
-
-        $this->expectException(\PDOException::class);
-        dd(EloquentModel::where('1=1')->get());
-    }
 }
 
 
@@ -105,11 +96,4 @@ class MultipleRepoModelTransformerRepository implements ValidationRepository
     {
         return ['field' => 'trim'];
     }
-}
-
-class EloquentModel extends \Illuminate\Database\Eloquent\Model
-{
-    use RuleRepositoryTrait;
-
-    protected $validationRepository = ModelValidationRepository::class;
 }

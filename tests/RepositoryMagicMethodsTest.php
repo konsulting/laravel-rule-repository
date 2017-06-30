@@ -34,6 +34,15 @@ class RepositoryMagicMethodsTest extends TestCase
         $this->assertEquals(['test_field' => 'required'], $staticRules);
         $this->assertEquals(['test_field' => 'required'], $instanceRules);
     }
+
+    /** @test */
+    public function it_does_not_interfere_with_parent_class_magic_method_calls()
+    {
+        $this->assertEquals(['test_field' => 'required'], EloquentModel::validationRules());
+
+        $this->expectException(\PDOException::class);
+        dd(EloquentModel::where('1=1')->get());
+    }
 }
 
 class OnlyHasMagicMethodsTrait
@@ -44,4 +53,11 @@ class OnlyHasMagicMethodsTrait
 class MagicMethodModel extends BaseModel
 {
     use RuleRepositoryTrait, RepositoryMagicMethods;
+}
+
+class EloquentModel extends \Illuminate\Database\Eloquent\Model
+{
+    use RuleRepositoryTrait, RepositoryMagicMethods;
+
+    protected $validationRepository = ModelValidationRepository::class;
 }
