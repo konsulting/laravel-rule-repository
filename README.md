@@ -1,10 +1,14 @@
-# Laravel Validation Repository
-A package to centralise the storage and organisation of validation rules, whilst avoiding storing them on the model or controller.
+# Laravel Rule Repository
+[![Build Status](https://scrutinizer-ci.com/g/klever/laravel-rule-repository/badges/build.png?b=master)](https://scrutinizer-ci.com/g/klever/laravel-rule-repository/build-status/master)
+[![Code Coverage](https://scrutinizer-ci.com/g/klever/laravel-rule-repository/badges/coverage.png?b=master)](https://scrutinizer-ci.com/g/klever/laravel-rule-repository/?branch=master)
+[![Scrutinizer Code Quality](https://scrutinizer-ci.com/g/klever/laravel-rule-repository/badges/quality-score.png?b=master)](https://scrutinizer-ci.com/g/klever/laravel-rule-repository/?branch=master)
+
+A package to allow rules (for example validation rules) to be attached to a model, whilst avoiding storing them on the model itself or in a controller.
 
 ## Installation
 Install via Composer:
 ```
-composer install klever/laravel-validation-repository
+composer install klever/laravel-rule-repository
 ```
 
 ## Usage
@@ -12,14 +16,16 @@ Each model under validation should have its own validation repository attached t
 You may, for example, require different validation rules when updating the model as opposed to creating it.
 
 ### Creating the repository
-The validation repository must implement `Contracts\ValidationRepository`, and as such must contain a `default()` method which returns an array of default validation rules.
-It may also contain any number of 'state' methods which contain differing validation rules.
+The validation repository must implement `Contracts\RuleRepository`, and as such must contain a `default()` method which returns an array of default rules.
+It may also contain any number of 'state' methods which contain differing rules.
 **These state-specific rules will be merged with the default rules when they are retrieved.**
 
-```php
-use Klever\Laravel\ValidationRepository\Contracts\ValidationRepository;
+State methods names should use camel case.
 
-class UserValidationRepository implements ValidationRepository
+```php
+use Klever\Laravel\RuleRepository\Contracts\RuleRepository;
+
+class UserRuleRepository implements RuleRepository
 {
     public function default() : array
     {
@@ -36,38 +42,56 @@ class UserValidationRepository implements ValidationRepository
 ```
 
 ### Attaching the repository to the model
-The model to be validated should use the `ValidationRepositoryTrait`. 
-It is recommended (but not required) that the model implements the interface `Contracts\HasValidationRepository`.
+The model to attach the rules to should use the `RuleRepositoryTrait` trait. 
+It is recommended (but not required) that the model implements the interface `Contracts\HasRuleRepository`.
 
-The static property `validationRepository` should be set to the class path of the validation repository.
+The static property `ruleRepositories` should be initialised to an associative array of repository class paths, with the repository name as the key.
 ```php
-use Klever\Laravel\ValidationRepository\Contracts\HasValidationRepository;
-use Klever\Laravel\ValidationRepository\ValidationRepositoryTrait;
+use Klever\Laravel\RuleRepository\Contracts\HasRuleRepository;
+use Klever\Laravel\RuleRepository\RuleRepositoryTrait;
 
-class User extends Model implements HasValidationRepository
+class User extends Model implements HasRuleRepository
 {
-    use ValidationRepositoryTrait;
+    use RuleRepositoryTrait;
 
-    protected static $validationRepository = UserValidationRepository::class;
+    protected static $ruleRepositories = [
+        'validation' => UserValidationRepository::class;
+    ];
 }
 ```
 
 ### Retrieving validation rules
-The model's validation rules can be retrieved using the static `validationRules()` method, which is added to the model by the trait `ValidationRepositoryTrait`.
+The model's validation rules can be retrieved using the static method `getRules($name, $state = 'default')`.
 
-To return the default rules:
+To return the default rules for the validation repository:
 ```php
-User::validationRules();
+User::getRules('validation');
 
 // or
 
-User::validationRules('default');
+User::getRules('validation', 'default');
 ```
 
 To get state-specific rules:
 ```php
-User::validationRules('update');
+User::getRules('validation', 'update');
 
-User::validationRules($stateName);
+User::getRules('validation', $state);
 ```
 States may be named in either camel-case or snake-case.
+
+#### Using magic methods
+The `RepositoryMagicMethods` trait may also be added to the model to allow rules to be retrieved with a more concise syntax.
+Rules may be retrieved using:
+
+```php
+Model::{$repositoryName . 'Rules'}($state = 'default');
+```
+
+For example:
+
+```php
+User::validationRules();
+
+User::validationRules('update');
+```

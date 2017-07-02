@@ -2,7 +2,7 @@
 
 namespace Klever\Laravel\RuleRepository;
 
-use Klever\Laravel\RuleRepository\Contracts\ValidationRepository;
+use Klever\Laravel\RuleRepository\Contracts\RuleRepository;
 use Klever\Laravel\RuleRepository\Exceptions\NonExistentStateException;
 
 class RepositoryManager
@@ -10,16 +10,16 @@ class RepositoryManager
     /**
      * The repository instance.
      *
-     * @var ValidationRepository
+     * @var RuleRepository
      */
     protected $repository;
 
     /**
      * Set the repository instance.
      *
-     * @param ValidationRepository $repository
+     * @param RuleRepository $repository
      */
-    public function __construct(ValidationRepository $repository)
+    public function __construct(RuleRepository $repository)
     {
         $this->repository = $repository;
     }

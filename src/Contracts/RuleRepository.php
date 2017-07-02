@@ -2,7 +2,7 @@
 
 namespace Klever\Laravel\RuleRepository\Contracts;
 
-interface ValidationRepository
+interface RuleRepository
 {
     /**
      * Get the default validation rule array.

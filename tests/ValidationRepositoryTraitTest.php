@@ -2,7 +2,7 @@
 
 namespace Klever\Laravel\RuleRepository\Tests;
 
-use Klever\Laravel\RuleRepository\Contracts\ValidationRepository;
+use Klever\Laravel\RuleRepository\Contracts\RuleRepository;
 use Klever\Laravel\RuleRepository\Tests\TestCase as TestCase;
 use Klever\Laravel\RuleRepository\RuleRepositoryTrait;
 
@@ -64,7 +64,7 @@ class DynamicRepoModel
 {
     use RuleRepositoryTrait;
 
-    protected static $validationRepository = ModelValidationRepository::class;
+    protected static $validationRepository = ModelRuleRepository::class;
 }
 
 class MultipleRepoModel
@@ -72,12 +72,12 @@ class MultipleRepoModel
     use RuleRepositoryTrait;
 
     protected static $ruleRepositories = [
-        'validation'  => MultipleRepoModelValidationRepository::class,
+        'validation'  => MultipleRepoModelRuleRepository::class,
         'transformer' => MultipleRepoModelTransformerRepository::class,
     ];
 }
 
-class MultipleRepoModelValidationRepository implements ValidationRepository
+class MultipleRepoModelRuleRepository implements RuleRepository
 {
     public function default() : array
     {
@@ -90,7 +90,7 @@ class MultipleRepoModelValidationRepository implements ValidationRepository
     }
 }
 
-class MultipleRepoModelTransformerRepository implements ValidationRepository
+class MultipleRepoModelTransformerRepository implements RuleRepository
 {
     public function default() : array
     {

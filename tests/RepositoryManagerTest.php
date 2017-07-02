@@ -17,7 +17,7 @@ class RepositoryManagerTest extends TestCase
     {
         parent::setUp();
 
-        $this->holder = new RepositoryManager(new ModelValidationRepository);
+        $this->holder = new RepositoryManager(new ModelRuleRepository);
     }
 
     /** @test */

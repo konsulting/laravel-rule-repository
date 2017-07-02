@@ -23,8 +23,6 @@ trait RepositoryMagicMethods
         if (get_parent_class(static::class)) {
             return parent::__callStatic($method, $args);
         }
-
-        return null;
     }
 
     /**
@@ -40,8 +38,6 @@ trait RepositoryMagicMethods
         if (get_parent_class($this)) {
             return parent::__call($method, $args);
         }
-
-        return null;
     }
 
     private static function getRulesMagically($method, $args)

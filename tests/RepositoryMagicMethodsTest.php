@@ -59,5 +59,5 @@ class EloquentModel extends \Illuminate\Database\Eloquent\Model
 {
     use RuleRepositoryTrait, RepositoryMagicMethods;
 
-    protected $validationRepository = ModelValidationRepository::class;
+    protected $validationRepository = ModelRuleRepository::class;
 }

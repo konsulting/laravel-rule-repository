@@ -1,9 +1,12 @@
 {
-  "name": "klever/laravel-validation-repository",
-  "description": "A centralised repository for validation rules, for use with the Laravel validator.",
+  "name": "klever/laravel-rule-repository",
+  "description": "A package to allow rules (for example validation rules) to be attached to a model.",
   "keywords": [
     "laravel",
     "validator",
+    "validation",
+    "transformer",
+    "rules",
     "repository"
   ],
   "license": "MIT",
@@ -27,6 +30,8 @@
     }
   },
   "autoload-dev": {
-    "classmap": ["tests"]
+    "classmap": [
+      "tests"
+    ]
   }
 }

@@ -3,7 +3,7 @@
 namespace Klever\Laravel\RuleRepository\Tests;
 
 use Klever\Laravel\RuleRepository\Contracts\HasRuleRepositories;
-use Klever\Laravel\RuleRepository\Contracts\ValidationRepository;
+use Klever\Laravel\RuleRepository\Contracts\RuleRepository;
 use Klever\Laravel\RuleRepository\RuleRepositoryTrait;
 use Orchestra\Testbench\TestCase as BaseTestCase;
 
@@ -15,10 +15,10 @@ class Model implements HasRuleRepositories
 {
     use RuleRepositoryTrait;
 
-    protected static $ruleRepositories = ['validation' => ModelValidationRepository::class];
+    protected static $ruleRepositories = ['validation' => ModelRuleRepository::class];
 }
 
-class ModelValidationRepository implements ValidationRepository
+class ModelRuleRepository implements RuleRepository
 {
     public function default() : array
     {
