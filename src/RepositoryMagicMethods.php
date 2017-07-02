@@ -51,7 +51,8 @@ trait RepositoryMagicMethods
     private static function getRulesMagically($method, $args)
     {
         static::checkForRuleRepositoryTrait();
-        $repositoryName = static::extractFromString($method, 'Rules');
+        $repositoryName = static::extractFromString($method,
+            config('rule_repository.method_suffix', 'Rules'));
 
         return $repositoryName
             ? static::getRules($repositoryName, ...$args)

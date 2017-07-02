@@ -70,7 +70,9 @@ trait RuleRepositoryTrait
     private static function extractRepositoriesFromProperties()
     {
         foreach (get_class_vars(static::class) as $key => $value) {
-            $repositoryName = static::extractFromString($key, 'Repository');
+            $repositoryName = static::extractFromString($key,
+                config('rule_repository.property_suffix', 'Repository'));
+
             if ($repositoryName) {
                 static::$masterRepositoryList->put($repositoryName, $value);
             }
