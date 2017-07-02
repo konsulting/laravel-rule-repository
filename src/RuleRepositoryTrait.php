@@ -32,16 +32,16 @@ trait RuleRepositoryTrait
     }
 
     /**
-     * Get the validation repository instance for the class.
+     * Get the instance of the specified rule repository. If the repository is not already instantiated, instantiate
+     * and store it in the repository instances array.
      *
-     * @param $name
+     * @param string $name
      * @return RepositoryManager
      * @throws Exception
      */
     protected static function getInstance($name)
     {
         static::$masterRepositoryList = collect();
-
         if (isset(static::$ruleRepositories)) {
             static::$masterRepositoryList = collect(static::$ruleRepositories);
         }

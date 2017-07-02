@@ -40,6 +40,14 @@ trait RepositoryMagicMethods
         }
     }
 
+    /**
+     * Check that the undefined method matches the repository rules pattern, and if so return the rules for that
+     * repository.
+     *
+     * @param string $method
+     * @param array  $args
+     * @return array
+     */
     private static function getRulesMagically($method, $args)
     {
         static::checkForRuleRepositoryTrait();
