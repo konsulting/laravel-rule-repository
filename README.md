@@ -8,7 +8,7 @@ A package to allow rules (for example validation rules) to be attached to a mode
 ## Installation
 Install via Composer:
 ```
-composer install klever/laravel-rule-repository
+composer require klever/laravel-rule-repository
 ```
 
 ## Usage
