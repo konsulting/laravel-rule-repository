@@ -43,9 +43,9 @@ class UserRuleRepository implements RuleRepository
 
 ### Attaching the repository to the model
 The model to attach the rules to should use the `RuleRepositoryTrait` trait. 
-It is recommended (but not required) that the model implements the interface `Contracts\HasRuleRepository`.
+It is recommended (but not required) that the model implements the interface `Contracts\HasRuleRepositories`.
 
-The static property `ruleRepositories` should be initialised to an associative array of repository class paths, with the repository name as the key.
+The static property `$ruleRepositories` should be initialised to an associative array of repository class paths, with the repository name as the key.
 ```php
 use Klever\Laravel\RuleRepository\Contracts\HasRuleRepository;
 use Klever\Laravel\RuleRepository\RuleRepositoryTrait;
