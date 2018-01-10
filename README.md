@@ -29,9 +29,11 @@ class UserRuleRepository implements RuleRepository
 {
     public function default() : array
     {
-        'name'          => 'required';
-        'email'         => 'required|email';
-        'date_of_birth' => 'required|date';
+        return [
+            'name'          => 'required',
+            'email'         => 'required|email',
+            'date_of_birth' => 'required|date',
+        ];
     }
     
     public function update() : array
