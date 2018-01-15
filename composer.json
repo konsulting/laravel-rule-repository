@@ -1,5 +1,5 @@
 {
-  "name": "klever/laravel-rule-repository",
+  "name": "konsulting/laravel-rule-repository",
   "description": "A package to allow rules (for example validation rules) to be attached to a model.",
   "keywords": [
     "laravel",
