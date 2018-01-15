@@ -1,7 +1,7 @@
 # Laravel Rule Repository
-[![Build Status](https://scrutinizer-ci.com/g/klever/laravel-rule-repository/badges/build.png?b=master)](https://scrutinizer-ci.com/g/klever/laravel-rule-repository/build-status/master)
-[![Code Coverage](https://scrutinizer-ci.com/g/klever/laravel-rule-repository/badges/coverage.png?b=master)](https://scrutinizer-ci.com/g/klever/laravel-rule-repository/?branch=master)
-[![Scrutinizer Code Quality](https://scrutinizer-ci.com/g/klever/laravel-rule-repository/badges/quality-score.png?b=master)](https://scrutinizer-ci.com/g/klever/laravel-rule-repository/?branch=master)
+[![Build Status](https://scrutinizer-ci.com/g/konsulting/laravel-rule-repository/badges/build.png?b=master)](https://scrutinizer-ci.com/g/konsulting/laravel-rule-repository/build-status/master)
+[![Code Coverage](https://scrutinizer-ci.com/g/konsulting/laravel-rule-repository/badges/coverage.png?b=master)](https://scrutinizer-ci.com/g/konsulting/laravel-rule-repository/?branch=master)
+[![Scrutinizer Code Quality](https://scrutinizer-ci.com/g/konsulting/laravel-rule-repository/badges/quality-score.png?b=master)](https://scrutinizer-ci.com/g/konsulting/laravel-rule-repository/?branch=master)
 
 A package to allow rules (for example validation rules) to be attached to a model, whilst avoiding storing them on the model itself or in a controller.
 
