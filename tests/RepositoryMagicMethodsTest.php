@@ -1,11 +1,11 @@
 <?php
 
-namespace Klever\Laravel\RuleRepository\Tests;
+namespace Konsulting\Laravel\RuleRepository\Tests;
 
-use Klever\Laravel\RuleRepository\Exceptions\RuleRepositoryTraitNotUsed;
-use Klever\Laravel\RuleRepository\RepositoryMagicMethods;
-use Klever\Laravel\RuleRepository\RuleRepositoryTrait;
-use Klever\Laravel\RuleRepository\Tests\Model as BaseModel;
+use Konsulting\Laravel\RuleRepository\Exceptions\RuleRepositoryTraitNotUsed;
+use Konsulting\Laravel\RuleRepository\RepositoryMagicMethods;
+use Konsulting\Laravel\RuleRepository\RuleRepositoryTrait;
+use Konsulting\Laravel\RuleRepository\Tests\Model as BaseModel;
 
 class RepositoryMagicMethodsTest extends TestCase
 {

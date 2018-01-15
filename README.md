@@ -23,7 +23,7 @@ It may also contain any number of 'state' methods which contain differing rules.
 State methods names should use camel case.
 
 ```php
-use Klever\Laravel\RuleRepository\Contracts\RuleRepository;
+use Konsulting\Laravel\RuleRepository\Contracts\RuleRepository;
 
 class UserRuleRepository implements RuleRepository
 {
@@ -49,8 +49,8 @@ It is recommended (but not required) that the model implements the interface `Co
 
 The static property `$ruleRepositories` should be initialised to an associative array of repository class paths, with the repository name as the key.
 ```php
-use Klever\Laravel\RuleRepository\Contracts\HasRuleRepository;
-use Klever\Laravel\RuleRepository\RuleRepositoryTrait;
+use Konsulting\Laravel\RuleRepository\Contracts\HasRuleRepository;
+use Konsulting\Laravel\RuleRepository\RuleRepositoryTrait;
 
 class User extends Model implements HasRuleRepository
 {

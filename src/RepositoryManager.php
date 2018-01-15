@@ -1,9 +1,9 @@
 <?php
 
-namespace Klever\Laravel\RuleRepository;
+namespace Konsulting\Laravel\RuleRepository;
 
-use Klever\Laravel\RuleRepository\Contracts\RuleRepository;
-use Klever\Laravel\RuleRepository\Exceptions\NonExistentStateException;
+use Konsulting\Laravel\RuleRepository\Contracts\RuleRepository;
+use Konsulting\Laravel\RuleRepository\Exceptions\NonExistentStateException;
 
 class RepositoryManager
 {

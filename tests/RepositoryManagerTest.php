@@ -1,10 +1,10 @@
 <?php
 
-namespace Klever\Laravel\RuleRepository\Tests;
+namespace Konsulting\Laravel\RuleRepository\Tests;
 
-use Klever\Laravel\RuleRepository\Exceptions\NonExistentStateException;
-use Klever\Laravel\RuleRepository\RepositoryManager;
-use Klever\Laravel\RuleRepository\Tests\TestCase as TestCase;
+use Konsulting\Laravel\RuleRepository\Exceptions\NonExistentStateException;
+use Konsulting\Laravel\RuleRepository\RepositoryManager;
+use Konsulting\Laravel\RuleRepository\Tests\TestCase as TestCase;
 
 class RepositoryManagerTest extends TestCase
 {

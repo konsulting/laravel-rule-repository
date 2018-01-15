@@ -1,6 +1,6 @@
 <?php
 
-namespace Klever\Laravel\RuleRepository\Exceptions;
+namespace Konsulting\Laravel\RuleRepository\Exceptions;
 
 use Exception;
 

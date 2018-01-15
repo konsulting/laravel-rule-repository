@@ -1,9 +1,9 @@
 <?php
 
-namespace Klever\Laravel\RuleRepository\Tests;
+namespace Konsulting\Laravel\RuleRepository\Tests;
 
-use Klever\Laravel\RuleRepository\RepositoryMagicMethods;
-use Klever\Laravel\RuleRepository\RuleRepositoryTrait;
+use Konsulting\Laravel\RuleRepository\RepositoryMagicMethods;
+use Konsulting\Laravel\RuleRepository\RuleRepositoryTrait;
 
 class ConfigTest extends TestCase
 {

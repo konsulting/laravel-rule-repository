@@ -1,6 +1,6 @@
 <?php
 
-namespace Klever\Laravel\RuleRepository\Contracts;
+namespace Konsulting\Laravel\RuleRepository\Contracts;
 
 interface RuleRepository
 {

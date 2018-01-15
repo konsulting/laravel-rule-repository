@@ -1,8 +1,8 @@
 <?php
 
-namespace Klever\Laravel\RuleRepository;
+namespace Konsulting\Laravel\RuleRepository;
 
-use Klever\Laravel\RuleRepository\Exceptions\RuleRepositoryTraitNotUsed;
+use Konsulting\Laravel\RuleRepository\Exceptions\RuleRepositoryTraitNotUsed;
 
 /**
  * @method static array validationRules(string $state = '')

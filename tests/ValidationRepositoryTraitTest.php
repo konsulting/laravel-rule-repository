@@ -1,10 +1,10 @@
 <?php
 
-namespace Klever\Laravel\RuleRepository\Tests;
+namespace Konsulting\Laravel\RuleRepository\Tests;
 
-use Klever\Laravel\RuleRepository\Contracts\RuleRepository;
-use Klever\Laravel\RuleRepository\Tests\TestCase as TestCase;
-use Klever\Laravel\RuleRepository\RuleRepositoryTrait;
+use Konsulting\Laravel\RuleRepository\Contracts\RuleRepository;
+use Konsulting\Laravel\RuleRepository\Tests\TestCase as TestCase;
+use Konsulting\Laravel\RuleRepository\RuleRepositoryTrait;
 
 class ValidationRepositoryTraitTest extends TestCase
 {

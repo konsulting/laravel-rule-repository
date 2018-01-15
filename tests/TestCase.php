@@ -1,10 +1,10 @@
 <?php
 
-namespace Klever\Laravel\RuleRepository\Tests;
+namespace Konsulting\Laravel\RuleRepository\Tests;
 
-use Klever\Laravel\RuleRepository\Contracts\HasRuleRepositories;
-use Klever\Laravel\RuleRepository\Contracts\RuleRepository;
-use Klever\Laravel\RuleRepository\RuleRepositoryTrait;
+use Konsulting\Laravel\RuleRepository\Contracts\HasRuleRepositories;
+use Konsulting\Laravel\RuleRepository\Contracts\RuleRepository;
+use Konsulting\Laravel\RuleRepository\RuleRepositoryTrait;
 use Orchestra\Testbench\TestCase as BaseTestCase;
 
 abstract class TestCase extends BaseTestCase

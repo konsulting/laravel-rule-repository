@@ -1,6 +1,6 @@
 <?php
 
-namespace Klever\Laravel\RuleRepository;
+namespace Konsulting\Laravel\RuleRepository;
 
 use Exception;
 use Illuminate\Support\Collection;
