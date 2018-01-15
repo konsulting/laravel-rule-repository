@@ -1,6 +1,7 @@
 {
   "name": "konsulting/laravel-rule-repository",
   "description": "A package to allow rules (for example validation rules) to be attached to a model.",
+  "type": "library",
   "keywords": [
     "laravel",
     "validator",
@@ -16,7 +17,6 @@
       "email": "robin@klever.co.uk"
     }
   ],
-  "type": "project",
   "require": {
     "php": "^7.0"
   },
