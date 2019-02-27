@@ -18,27 +18,43 @@ You may, for example, require different validation rules when updating the model
 ### Creating the repository
 The validation repository must implement `Contracts\RuleRepository`, and as such must contain a `default()` method which returns an array of default rules.
 It may also contain any number of 'state' methods which contain differing rules.
-**These state-specific rules will be merged with the default rules when they are retrieved.**
 
-State methods names should use camel case.
+**Note:**
+ - State methods names should use camel case.
+ - State-specific rules will be merged (non-recursively) with the default rules when they are retrieved.
+
+### Extending the `AbstractRepository` class
+The `AbstractRepository` class is provided with some helper functions to make defining rules easier. This class may be extended instead of directly implementing the interface.
+
+Sometimes it's useful to append or prepend a rule to an existing list of rules, e.g. making values required only on model creation. This is possible with the following methods:
+
+```php
+AbstractRepository::prependRule(string $rule, array $baseRules);
+AbstractRepository::prependRules(array $rules, array$baseRules);
+
+AbstractRepository::appendRule(string $rule, array $baseRules);
+AbstractRepository::appendRules(array $rules, array$baseRules);
+```
+
+Example repository:
 
 ```php
 use Konsulting\Laravel\RuleRepository\Contracts\RuleRepository;
 
-class UserRuleRepository implements RuleRepository
+class UserRuleRepository extends AbstractRepository
 {
     public function default() : array
     {
         return [
-            'name'          => 'required',
-            'email'         => 'required|email',
-            'date_of_birth' => 'required|date',
+            'name'          => 'string',
+            'email'         => 'string|email',
+            'date_of_birth' => 'date',
         ];
     }
     
-    public function update() : array
+    public function create() : array
     {
-        // Rules here may override or add to the default rules.
+        return $this->prependRule('required', $this->default());
     }
 }
 ```
