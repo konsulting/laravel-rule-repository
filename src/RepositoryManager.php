@@ -33,7 +33,7 @@ class RepositoryManager
      */
     public function getRules($state = null)
     {
-        $method = camel_case($state ?? 'default');
+        $method = camel_case($state ?: 'default');
 
         if ( ! method_exists($this->repository, $method)) {
             throw new NonExistentStateException($method);
