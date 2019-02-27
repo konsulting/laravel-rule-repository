@@ -30,10 +30,10 @@ Sometimes it's useful to append or prepend a rule to an existing list of rules, 
 
 ```php
 AbstractRepository::prependRule(string $rule, array $baseRules);
-AbstractRepository::prependRules(array $rules, array$baseRules);
+AbstractRepository::prependRules(array $rules, array $baseRules);
 
 AbstractRepository::appendRule(string $rule, array $baseRules);
-AbstractRepository::appendRules(array $rules, array$baseRules);
+AbstractRepository::appendRules(array $rules, array $baseRules);
 ```
 
 Example repository:
