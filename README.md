@@ -39,7 +39,7 @@ AbstractRepository::appendRules(array $rules, array$baseRules);
 Example repository:
 
 ```php
-use Konsulting\Laravel\RuleRepository\Contracts\RuleRepository;
+use Konsulting\Laravel\RuleRepository\AbstractRepository;
 
 class UserRuleRepository extends AbstractRepository
 {
