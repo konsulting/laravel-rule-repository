@@ -15,8 +15,38 @@ abstract class AbstractRepository implements RuleRepository
      */
     protected function prependRule($rule, $baseRules)
     {
-        return array_map(function ($ruleLine) use ($rule) {
-            return array_merge([$rule], $this->ensureArray($ruleLine));
+        return $this->prependRules([$rule], $baseRules);
+    }
+
+    /**
+     * Prepend rules to all fields. Rules expressed as pipe-delimited strings will be converted to arrays.
+     *
+     * @param array $rules
+     * @param array $baseRules
+     * @return array[]
+     */
+    protected function prependRules($rules, $baseRules)
+    {
+        return array_map(function ($ruleLine) use ($rules) {
+            return $this->removeDuplicates(
+                array_merge($rules, $this->ensureArray($ruleLine))
+            );
+        }, $baseRules);
+    }
+
+    /**
+     * Append rules to all fields. Rules expressed as pipe-delimited strings will be converted to arrays.
+     *
+     * @param array $rules
+     * @param array $baseRules
+     * @return array[]
+     */
+    protected function appendRules($rules, $baseRules)
+    {
+        return array_map(function ($ruleLine) use ($rules) {
+            return $this->removeDuplicates(
+                array_merge($this->ensureArray($ruleLine), $rules)
+            );
         }, $baseRules);
     }
 
@@ -29,9 +59,7 @@ abstract class AbstractRepository implements RuleRepository
      */
     protected function appendRule($rule, $baseRules)
     {
-        return array_map(function ($ruleLine) use ($rule) {
-            return array_merge($this->ensureArray($ruleLine), [$rule]);
-        }, $baseRules);
+        return $this->appendRules([$rule], $baseRules);
     }
 
     /**
@@ -49,5 +77,16 @@ abstract class AbstractRepository implements RuleRepository
         }
 
         return is_array($ruleLine) ? $ruleLine : [$ruleLine];
+    }
+
+    /**
+     * Remove duplicate items and reset numerical keys.
+     *
+     * @param array $array
+     * @return array
+     */
+    private function removeDuplicates($array)
+    {
+        return array_values(array_unique($array, SORT_REGULAR));
     }
 }
