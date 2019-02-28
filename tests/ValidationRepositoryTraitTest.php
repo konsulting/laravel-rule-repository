@@ -3,8 +3,8 @@
 namespace Konsulting\Laravel\RuleRepository\Tests;
 
 use Konsulting\Laravel\RuleRepository\Contracts\RuleRepository;
-use Konsulting\Laravel\RuleRepository\Tests\TestCase as TestCase;
 use Konsulting\Laravel\RuleRepository\RuleRepositoryTrait;
+use Konsulting\Laravel\RuleRepository\Tests\TestCase as TestCase;
 
 class ValidationRepositoryTraitTest extends TestCase
 {
@@ -13,7 +13,7 @@ class ValidationRepositoryTraitTest extends TestCase
      */
     protected $model;
 
-    public function setUp()
+    public function setUp(): void
     {
         parent::setUp();
 
@@ -33,7 +33,7 @@ class ValidationRepositoryTraitTest extends TestCase
     {
         $transformerRules = MultipleRepoModel::getRules('transformer');
         $validationRules = MultipleRepoModel::getRules('validation');
-        $stateValidationRules = MultipleRepoModel::getRules('validation','edit');
+        $stateValidationRules = MultipleRepoModel::getRules('validation', 'edit');
 
         $this->assertEquals(['field' => 'trim'], $transformerRules);
         $this->assertEquals(['field' => 'required'], $validationRules);
@@ -79,7 +79,7 @@ class MultipleRepoModel
 
 class MultipleRepoModelRuleRepository implements RuleRepository
 {
-    public function default() : array
+    public function default(): array
     {
         return ['field' => 'required'];
     }
@@ -92,7 +92,7 @@ class MultipleRepoModelRuleRepository implements RuleRepository
 
 class MultipleRepoModelTransformerRepository implements RuleRepository
 {
-    public function default() : array
+    public function default(): array
     {
         return ['field' => 'trim'];
     }

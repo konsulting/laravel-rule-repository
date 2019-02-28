@@ -13,7 +13,7 @@ class RepositoryManagerTest extends TestCase
      */
     protected $holder;
 
-    public function setUp()
+    public function setUp(): void
     {
         parent::setUp();
 
