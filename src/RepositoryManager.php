@@ -2,6 +2,7 @@
 
 namespace Konsulting\Laravel\RuleRepository;
 
+use Illuminate\Support\Str;
 use Konsulting\Laravel\RuleRepository\Contracts\RuleRepository;
 use Konsulting\Laravel\RuleRepository\Exceptions\NonExistentStateException;
 
@@ -33,7 +34,7 @@ class RepositoryManager
      */
     public function getRules($state = null)
     {
-        $method = camel_case($state ?: 'default');
+        $method = Str::camel($state ?: 'default');
 
         if ( ! method_exists($this->repository, $method)) {
             throw new NonExistentStateException($method);
