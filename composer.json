@@ -1,37 +1,37 @@
 {
-  "name": "konsulting/laravel-rule-repository",
-  "description": "A package to allow rules (for example validation rules) to be attached to a model.",
-  "type": "library",
-  "keywords": [
-    "laravel",
-    "validator",
-    "validation",
-    "transformer",
-    "rules",
-    "repository"
-  ],
-  "license": "MIT",
-  "authors": [
-    {
-      "name": "Robin D'Arcy",
-      "email": "robin@klever.co.uk"
+    "name": "konsulting/laravel-rule-repository",
+    "description": "A package to allow rules (for example validation rules) to be attached to a model.",
+    "type": "library",
+    "keywords": [
+        "laravel",
+        "validator",
+        "validation",
+        "transformer",
+        "rules",
+        "repository"
+    ],
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "Robin D'Arcy",
+            "email": "robin@klever.co.uk"
+        }
+    ],
+    "require": {
+        "php": "^7.0"
+    },
+    "require-dev": {
+        "phpunit/phpunit": "^8.0",
+        "orchestra/testbench": "^3.4"
+    },
+    "autoload": {
+        "psr-4": {
+            "Konsulting\\Laravel\\RuleRepository\\": "src/"
+        }
+    },
+    "autoload-dev": {
+        "classmap": [
+            "tests"
+        ]
     }
-  ],
-  "require": {
-    "php": "^7.0"
-  },
-  "require-dev": {
-    "phpunit/phpunit": "~5.7",
-    "orchestra/testbench": "^3.4"
-  },
-  "autoload": {
-    "psr-4": {
-      "Konsulting\\Laravel\\RuleRepository\\": "src/"
-    }
-  },
-  "autoload-dev": {
-    "classmap": [
-      "tests"
-    ]
-  }
 }
